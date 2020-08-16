@@ -19,9 +19,40 @@ We build v4.0.4 TiDB
 
 
 ## Deploy 
-MiniCluster  
+### MiniCluster  
 ```
 1 PD
 3 TiKV 
 1 TiDB
+```
+### Run PD
+```
+./bin/pd-server --name="minicluster" \
+          --data-dir="/data/pd" \
+          --client-urls="http://127.0.0.1::2379" \
+          --peer-urls="http://127.0.01:2380" \
+          --log-file=/data/pd/pd.log
+```
+### Run TiKV
+```
+./bin/tikv-server --pd-endpoints="127.0.0.1:2379" \
+                --addr="127.0.0.1:20160" \
+                --data-dir=/data/tikv1 \
+                --log-file=/data/tikv1.log 
+
+./bin/tikv-server --pd-endpoints="127.0.0.1:2379" \
+                --addr="127.0.0.1:20161" \
+                --data-dir=/data/tikv2 \
+                --log-file=/data/tikv2.log 
+
+./bin/tikv-server --pd-endpoints="127.0.01:2379" \
+                --addr="127.0.0.1:20162" \
+                --data-dir=/data/tikv3 \
+                --log-file=/data/tikv3.log 
+
+```
+
+### Run TiDB
+```
+./bin/tidb-server --store=tikv --path="127.0.0.1:2379" --config ./config.toml
 ```
