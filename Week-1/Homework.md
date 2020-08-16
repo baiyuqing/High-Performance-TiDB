@@ -55,3 +55,9 @@ We build v4.0.4 TiDB
 ```
 ./bin/tidb-server --store=tikv --path="127.0.0.1:2379" --config ./config.toml
 ```
+
+
+
+## Logging when start transaction
+[github commit](https://github.com/baiyuqing/tidb/commit/e4e1cd02707f83b28a09ce7a7899cef96a864160)
+
